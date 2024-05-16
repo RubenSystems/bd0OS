@@ -8,7 +8,7 @@ BOOTLOADER_SOURCE = boot.S
 
 
 run: build
-	qemu-system-aarch64 -M raspi3b -kernel $(TARGET) -nographic
+	qemu-system-aarch64 -M raspi3b -serial stdio -kernel $(TARGET)
 
 build:
 	aarch64-elf-as -c $(BOOTLOADER_SOURCE) -o $(BOOTLOADER_TARGET)

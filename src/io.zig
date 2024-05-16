@@ -28,3 +28,20 @@ pub fn write(s: [] const u8) void {
         putc(c);
     }
 }
+
+pub fn init() void {
+    mmio_write(registers.UART0_CR, 0x00000000);
+    mmio_write(registers.GPPUD, 0x00000000);
+    // delay
+    mmio_write(registers.GPPUDCLK0, (1 << 14) | (1 << 15));
+    // delay
+    mmio_write(registers.GPPUDCLK0, 0x00000000);
+    mmio_write(registers.UART0_ICR, 0x7FF);
+    // 3 check
+	mmio_write(registers.UART0_IBRD, 1);
+	mmio_write(registers.UART0_FBRD, 40);
+	mmio_write(registers.UART0_LCRH, (1 << 4) | (1 << 5) | (1 << 6));
+	mmio_write(registers.UART0_IMSC, (1 << 1) | (1 << 4) | (1 << 5) | (1 << 6) |
+	                       (1 << 7) | (1 << 8) | (1 << 9) | (1 << 10));
+	mmio_write(registers.UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
+}
