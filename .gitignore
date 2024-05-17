@@ -1,5 +1,9 @@
-zig-cache
+zig-cache/
 main
+zig-out/
+build/
+build-*/
+docgen_tmp/
 
 # Prerequisites
 *.d

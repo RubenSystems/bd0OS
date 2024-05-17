@@ -1,12 +1,16 @@
 const io = @import("io.zig");
 
-
-
 export fn kernel_main() void {
     io.init();
-    io.write("hello");
+    io.write("> ");
+
 
     while (true) {
-        io.putc(io.readc());
+        const char = io.readc();
+        if (char == 13) {
+            io.write("\n> ");
+        } else {
+            io.putc(char);
+        }
     }
 }

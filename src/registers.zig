@@ -32,4 +32,4 @@ pub const UART0_TDR    = UART0_BASE + 0x8C;
 pub const MBOX_BASE    = 0xB880;
 pub const MBOX_READ    = MBOX_BASE + 0x00;
 pub const MBOX_STATUS  = MBOX_BASE + 0x18;
-pub const MBOX_WRITE   = MBOX_BASE + 0x2;
+pub const MBOX_WRITE   = MBOX_BASE + 0x20;
