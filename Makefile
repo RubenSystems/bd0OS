@@ -1,5 +1,5 @@
 TARGET = bin/bd0.elf
-KERNEL_TARGET = libmain.a
+KERNEL_TARGET = zig-out/lib/libbd0.a
 BOOTLOADER_TARGET = bin/boot.o
 
 
@@ -13,7 +13,7 @@ run: build
 
 build:
 	aarch64-elf-as -c $(BOOTLOADER_SOURCE) -o $(BOOTLOADER_TARGET)
-	zig build-lib src/main.zig -target aarch64-freestanding
+	zig build
 	aarch64-elf-gcc -T linker.ld -o $(TARGET) -ffreestanding -O2 -nostdlib $(BOOTLOADER_TARGET) $(KERNEL_TARGET) -lgcc
 
 

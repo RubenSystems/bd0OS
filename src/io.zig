@@ -31,6 +31,13 @@ pub fn write(s: [] const u8) void {
     }
 }
 
+pub fn hr() void {
+    for (0..10) |_| {
+        putc('=');
+    }
+}
+
+
 
 fn delay(count: i32) void {
     var remaining: i32 = count;
@@ -88,4 +95,5 @@ pub fn init() void {
 	mmio_write(registers.UART0_IMSC, (1 << 1) | (1 << 4) | (1 << 5) | (1 << 6) |
 	                       (1 << 7) | (1 << 8) | (1 << 9) | (1 << 10));
 	mmio_write(registers.UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
+	delay(1000);
 }

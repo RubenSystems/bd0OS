@@ -8,7 +8,13 @@ pub fn build(b: *std.Build) void {
     // what target to build for. Here we do not override the defaults, which
     // means any target is allowed, and the default is native. Other options
     // for restricting supported target set are available.
-    const target = b.standardTargetOptions(.{});
+    const target = b.standardTargetOptions(.{
+        .default_target = std.zig.CrossTarget{
+            .cpu_arch = std.Target.Cpu.Arch.aarch64,
+            .os_tag = std.Target.Os.Tag.freestanding,
+            .abi = std.Target.Abi.none,
+        }
+    });
 
     // Standard optimization options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall. Here we do not
@@ -24,17 +30,11 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+
     // This declares intent for the library to be installed into the standard
     // location when the user invokes the "install" step (the default step when
     // running `zig build`).
     b.installArtifact(lib);
-
-    // const exe = b.addExecutable(.{
-    //     .name = "bd0",
-    //     .root_source_file = b.path("src/main.zig"),
-    //     .target = target,
-    //     .optimize = optimize,
-    // });
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
