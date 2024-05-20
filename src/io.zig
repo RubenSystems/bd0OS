@@ -31,10 +31,12 @@ pub fn write(s: [] const u8) void {
     }
 }
 
-pub fn hr() void {
-    for (0..10) |_| {
+pub fn hr(size: u8) void {
+    putc('\n');
+    for (0..size) |_| {
         putc('=');
     }
+    putc('\n');
 }
 
 
@@ -87,13 +89,10 @@ pub fn init() void {
         // ) { }
     }
 
-
-
 	mmio_write(registers.UART0_IBRD, 1);
 	mmio_write(registers.UART0_FBRD, 40);
 	mmio_write(registers.UART0_LCRH, (1 << 4) | (1 << 5) | (1 << 6));
 	mmio_write(registers.UART0_IMSC, (1 << 1) | (1 << 4) | (1 << 5) | (1 << 6) |
 	                       (1 << 7) | (1 << 8) | (1 << 9) | (1 << 10));
 	mmio_write(registers.UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
-	delay(1000);
 }

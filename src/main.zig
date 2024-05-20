@@ -4,8 +4,8 @@ const io = @import("io.zig");
 
 export fn kernel_main() void {
     io.init();
-    io.hr();
-    io.write("\n\n>");
+    io.hr(40);
+    io.write("\n\n> ");
     var input_buffer: [100] u8 = undefined;
     var input_location: usize = 0;
 
@@ -14,7 +14,7 @@ export fn kernel_main() void {
         const char = io.readc();
         if (char == 13) {
             // execute action
-            io.write("\nINPUT: ");
+            io.write("\n\nINPUT: ");
             for (0..input_location) |i| {
                 io.putc(input_buffer[i]);
             }
