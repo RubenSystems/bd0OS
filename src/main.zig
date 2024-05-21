@@ -1,14 +1,20 @@
 const io = @import("io.zig");
 
-
+/// # Safety
+/// - The buffers must be the same length
+fn eq(comptime T: type, lhs: []const T, rhs: []const T) bool {
+    for (0..lhs.len) |i| {
+        if (lhs[i] != rhs[i]) return false;
+    }
+    return true;
+}
 
 export fn kernel_main() void {
     io.init();
     io.hr(100);
     io.write("\n\n> ");
-    var input_buffer: [100] u8 = undefined;
+    var input_buffer: [100]u8 = undefined;
     var input_location: usize = 0;
-
 
     while (true) {
         const char = io.readc();
