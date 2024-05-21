@@ -4,7 +4,7 @@ const io = @import("io.zig");
 
 export fn kernel_main() void {
     io.init();
-    io.hr(40);
+    io.hr(100);
     io.write("\n\n> ");
     var input_buffer: [100] u8 = undefined;
     var input_location: usize = 0;
@@ -24,7 +24,6 @@ export fn kernel_main() void {
             io.putc(char);
             input_buffer[input_location] = char;
             input_location += 1;
-
         }
     }
 }

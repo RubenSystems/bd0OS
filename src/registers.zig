@@ -10,7 +10,8 @@ pub const GPPUD = GPIO_BASE + 0x94;
 // Controls actuation of pull up/down for specific GPIO pin.
 pub const GPPUDCLK0 = GPIO_BASE + 0x98;
 // The base address for UART.
-pub const UART0_BASE = GPIO_BASE + 0x1000;// for raspi4 0xFE201000, raspi2 & 3 0x3F201000, and 0x20201000 for raspi1
+// for raspi4 0xFE201000, raspi2 & 3 0x3F201000, and 0x20201000 for raspi1
+pub const UART0_BASE = GPIO_BASE + 0x1000;
 // The offsets for each register for the UART.
 pub const UART0_RSRECR = UART0_BASE + 0x04;
 pub const UART0_ILPR   = UART0_BASE + 0x20;
