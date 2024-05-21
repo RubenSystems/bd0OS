@@ -1,4 +1,4 @@
-# Memory Management
+# Process Layout
 
 BD0 is not for multi-user operating systems. As a result, we don't 
 really need separation of kernel and userspace.
