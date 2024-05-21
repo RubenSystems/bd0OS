@@ -4,9 +4,6 @@ BOOTLOADER_TARGET = bin/boot.o
 
 BOOTLOADER_SOURCE = boot.s
 
-AARCH64_AS = aarch64-linux-gnu-as
-AARCH64_CC = aarch64-linux-gnu-gcc
-
 all: build
 
 run: build
@@ -14,9 +11,9 @@ run: build
 	qemu-system-aarch64 -M raspi3b -kernel $(TARGET) -nographic
 
 build:
-	$(AARCH64_AS) -c $(BOOTLOADER_SOURCE) -o $(BOOTLOADER_TARGET)
+	${AARCH64_AS} -c $(BOOTLOADER_SOURCE) -o $(BOOTLOADER_TARGET)
 	zig build-lib src/main.zig -target aarch64-freestanding -fcompiler-rt
-	$(AARCH64_CC) -T linker.ld -o $(TARGET) -ffreestanding -O2 -nostdlib $(BOOTLOADER_TARGET) $(KERNEL_TARGET) -lgcc
+	${AARCH64_CC} -T linker.ld -o $(TARGET) -ffreestanding -O2 -nostdlib $(BOOTLOADER_TARGET) $(KERNEL_TARGET) -lgcc
 
 clean:
 	rm $(TARGET) $(BOOTLOADER_TARGET) $(KERNEL_TARGET)
