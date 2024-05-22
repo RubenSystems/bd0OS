@@ -10,8 +10,11 @@
 
 const io = @import("io.zig");
 
+
+
 export fn kernel_main() void {
     io.init();
+    io.write("\n\n> ");
     while (true) {
         const char = io.readc();
         io.putc(char);

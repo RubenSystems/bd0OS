@@ -1,15 +1,13 @@
 const registers = @import("registers.zig");
 
 fn write32(register: u32, data: u32) void {
-    const regv = registers.MMIO_BASE + register;
-    const ptr: *volatile u32 = @ptrFromInt(regv);
+    const ptr: *volatile u32 = @ptrFromInt(registers.MMIO_BASE + register);
     ptr.* = data;
 }
 
 
 fn read32(register: u32) u32 {
-    const offset = registers.MMIO_BASE + register;
-    const ptr: *volatile u32 = @ptrFromInt(offset);
+    const ptr: *volatile u32 = @ptrFromInt(registers.MMIO_BASE + register);
     return ptr.*;
 }
 
