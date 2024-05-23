@@ -5,8 +5,8 @@
 
 // Make _start global.
 .globl _start
-
     .org 0x80000
+
 // Entry point for the kernel. Registers:
 // x0 -> 32 bit pointer to DTB in memory (primary core only) / 0 (secondary cores)
 // x1 -> 0
@@ -16,7 +16,7 @@
 _start:
     // set stack before our code
     ldr     x5, =_start
-    mov     sp, x5
+    mov     sp, ldr
 
     // clear bss
     ldr     x5, =__bss_start
@@ -28,7 +28,8 @@ _start:
 
     // jump to C code, should not return
 2:  bl      kernel_main
-    // for failsafe, halt this core
+
+// for failsafe, halt this core
 halt:
     wfe
     b halt

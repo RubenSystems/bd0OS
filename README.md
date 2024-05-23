@@ -21,8 +21,6 @@ are some things we want BD0 to be able to do:
 You will need an aarch64 assembler, a Zig compiler and Qemu and also 
 perhaps some other things. I'm sure you can figure it out.
 
-
-
 To build/run etc.
 
 ```makefile
