@@ -1,12 +1,7 @@
-// AArch64 mode
-
-// To keep this in the first portion of the binary.
 .section ".text.boot"
-
-// Make _start global.
 .globl _start
-
     .org 0x80000
+
 // Entry point for the kernel. Registers:
 // x0 -> 32 bit pointer to DTB in memory (primary core only) / 0 (secondary cores)
 // x1 -> 0
@@ -14,7 +9,37 @@
 // x3 -> 0
 // x4 -> 32 bit kernel entry point, _start location
 _start:
-    // set stack before our code
+
+    //get processor id
+    mrs	x0, mpidr_el1
+
+    // make it 8 bit
+	and	x0, x0,#0xFF
+
+	// branch to config function if on processor 0
+	cbz	x0, config_proc_0
+
+config_proc_0:
+    // for register values, look at p2654 of AArch64-Reference-Manual.
+    ldr    x0, =((3 << 28) | (3 << 22) | (1 << 20) | (1 << 11) | (0 << 25) | (0 << 12) | (0 << 2) | (0 << 0))
+    msr    sctlr_el1, x0
+
+    ldr    x0, =(1 << 31)
+    msr    hcr_el2, x0
+
+    ldr    x0, =((3 << 4) | (1 << 10) | (1 << 0))
+    msr    scr_el3, x0
+
+    ldr    x0, =((7 << 6) | (5 << 0))
+    msr    spsr_el3, x0
+
+    adr    x0, boot
+    msr    elr_el3, x0
+
+    eret
+
+boot:
+    // setup stack pointer
     ldr     x5, =_start
     mov     sp, x5
 
@@ -26,9 +51,5 @@ _start:
     sub     w6, w6, #1
     cbnz    w6, 1b
 
-    // jump to C code, should not return
+    // jump to main kernel
 2:  bl      kernel_main
-    // for failsafe, halt this core
-halt:
-    wfe
-    b halt

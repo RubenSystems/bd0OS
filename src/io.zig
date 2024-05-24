@@ -42,6 +42,17 @@ fn delay(count: i32) void {
 	);
 }
 
+pub fn get_exception_level() i32 {
+    var el: i32 = undefined;
+	asm volatile(
+	    "mrs %[el], CurrentEL\nlsr %[el], %[el], #2\n"
+        : [el]"=r" (el)
+        :
+        : "cc"
+	);
+	return el;
+}
+
 
 var mbox align(16) = [9] u32 {
     9*4,

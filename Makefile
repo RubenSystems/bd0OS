@@ -2,7 +2,7 @@ TARGET = bin/bd0.elf
 KERNEL_TARGET = libmain.a
 BOOTLOADER_TARGET = bin/boot.o
 
-BOOTLOADER_SOURCE = boot.s
+BOOTLOADER_SOURCE = boot.S
 
 all: build
 
