@@ -24,17 +24,17 @@ config_proc_0:
     ldr    x0, =((3 << 28) | (3 << 22) | (1 << 20) | (1 << 11) | (0 << 25) | (0 << 12) | (0 << 2) | (0 << 0))
     msr    sctlr_el1, x0
 
-    ldr    x0, =(1 << 31)
-    msr    hcr_el2, x0
+    ldr    x1, =(1 << 31)
+    msr    hcr_el2, x1
 
-    ldr    x0, =((3 << 4) | (1 << 10) | (1 << 0))
-    msr    scr_el3, x0
+    ldr    x2, =((3 << 4) | (1 << 10) | (1 << 0))
+    msr    scr_el3, x2
 
-    ldr    x0, =((7 << 6) | (5 << 0))
-    msr    spsr_el3, x0
+    ldr    x3, =((7 << 6) | (5 << 0))
+    msr    spsr_el3, x3
 
-    adr    x0, boot
-    msr    elr_el3, x0
+    adr    x4, boot
+    msr    elr_el3, x4
 
     eret
 
